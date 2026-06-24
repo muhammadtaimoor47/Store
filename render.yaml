@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: derna-inventory
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SK_PASSWORD
+        value: derna2025
+      - key: SK_USERNAME
+        value: storekeeper
+    disk:
+      name: inventory-data
+      mountPath: /data
+      sizeGB: 1
